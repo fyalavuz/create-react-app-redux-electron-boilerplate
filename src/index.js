@@ -7,15 +7,14 @@ import App from './containers/app'
 
 import 'sanitize.css/sanitize.css'
 import './index.css'
+import './vendors/photon/css/photon.css'
 
 const target = document.querySelector('#root')
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
         <App />
-      </div>
     </ConnectedRouter>
   </Provider>,
   target

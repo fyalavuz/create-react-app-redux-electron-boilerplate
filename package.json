@@ -1,21 +1,47 @@
 {
   "private": true,
-  "homepage": "https://create-react-app-redux.now.sh",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.my-website.my-app",
+    "productName": "MyApp",
+    "copyright": "Copyright © 2019 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
   "scripts": {
-    "deploy": "now && now alias",
-    "start": "react-scripts start",
-    "now-start": "serve -s ./build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "rescripts start",
+    "test": "rescripts test",
     "eject": "react-scripts eject",
-    "precommit": "pretty-quick --staged"
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build -mw"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "devDependencies": {
-    "prettier": "2.0.4",
-    "react-scripts": "3.4.1"
+    "@rescripts/cli": "^0.0.10",
+    "@rescripts/rescript-env": "^0.0.5",
+    "concurrently": "^4.1.0",
+    "electron": "^4.0.6",
+    "electron-builder": "^20.38.5",
+    "react-scripts": "^3.4.1",
+    "typescript": "^3.3.3333",
+    "wait-on": "^3.2.0"
   },
   "dependencies": {
     "connected-react-router": "6.8.0",
+    "electron-is-dev": "^1.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.0",
